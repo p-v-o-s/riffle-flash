@@ -1,17 +1,17 @@
 # riffle-flash
 
-instructions for a unix-based system:
+Instructions for a unix-based system.
 
-in the 'blinker' directory:
-
-1. First make flash.sh executable:
+In the 'blinker' directory ... first make flash.sh executable:
 
 ```
 chmod u+x flash.sh
 ```
 
-2. then run the script:
+Then run the script:
 
 ```
 sudo ./flash.sh
 ```
+
+The device should blink once per second.
