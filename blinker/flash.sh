@@ -1,15 +1,8 @@
 #!/bin/bash
 
-echo "set the fuse bits ..."
 
-sudo avrdude -b 19200 -c usbtiny -p m328p -v -e -U efuse:w:0x05:m -U hfuse:w:0xDE:m -U lfuse:w:0xFF:m
+sudo avrdude -C ./avrdude.conf -v -patmega328p -cusbtiny -e -Ulock:w:0x3F:m -Uefuse:w:0x05:m -Uhfuse:w:0xDE:m -Ulfuse:w:0xFF:m
 
-echo "loading the bootloader ..."
+sudo avrdude -C ./avrdude.conf -v -patmega328p -cusbtiny -Uflash:w:./optiboot_atmega328.hex:i -Ulock:w:0x0F:m
 
-sudo avrdude -b19200 -c usbtiny -p m328p -v -e -U flash:w:./blink_boot.hex -U lock:w:0x0F:m
-
-sudo avrdude -b19200 -c usbtiny -p m328p -v -e -U flash:w:optiboot_atmega328.hex -U lock:w:0x0F:m
-
-echo "loading the program file ..."
-
-sudo avrdude -b19200 -c usbtiny -p m328p -v -e -U flash:w:blink_1s.hex -U lock:w:0x0F:m
+sudo avrdude -C ./avrdude.conf -v -patmega328p -c usbtiny -b115200 -D -Uflash:w:./Blink_riffle.ino.hex:i
